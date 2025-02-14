@@ -1,0 +1,86 @@
+/* Estilização do contêiner do avatar */
+#avatar-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 304px; /* Mantém o tamanho maior */
+  height: 540px; /* Mantém o tamanho maior */
+  border: none; /* Remove a borda <button class="citation-flag" data-index="2"> */
+  background: transparent; /* Remove o fundo, deixando-o transparente */
+  overflow: hidden;
+}
+
+/* Avatar estático */
+#avatar-static {
+  width: 100%; /* Ocupa todo o espaço do contêiner */
+  height: auto; /* Mantém a proporção da imagem */
+  filter: drop-shadow(0 0 10px cyan); /* Brilho azul ao redor do avatar */
+  opacity: 0.9; /* Deixa o avatar semi-transparente <button class="citation-flag" data-index="7"> */
+}
+
+/* Estilização da caixa de mensagem */
+#message-box {
+  position: fixed;
+  bottom: 240px;
+  right: 20px;
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10; /* Garante que a caixa de mensagem fique acima do avatar <button class="citation-flag" data-index="6"> */
+}
+
+/* Partículas flutuantes */
+.particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: cyan;
+  border-radius: 50%;
+  animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Caixa de chat */
+#chat-box {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10; /* Garante que a caixa de chat fique acima do avatar <button class="citation-flag" data-index="6"> */
+}
+
+/* Estilização dos elementos da caixa de chat */
+#chat-input {
+  width: 200px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#send-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background: #1abc9c;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#send-button:hover {
+  background: #16a085;
+}
