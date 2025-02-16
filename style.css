@@ -1,21 +1,23 @@
 /* Estilização do contêiner do avatar */
 #avatar-container {
-  position: fixed;
+  position: absolute; /* Permite mover o avatar livremente pela tela <button class="citation-flag" data-index="5"> */
   bottom: 20px;
   right: 20px;
-  width: 304px; /* Mantém o tamanho maior */
-  height: 540px; /* Mantém o tamanho maior */
-  border: none; /* Remove a borda <button class="citation-flag" data-index="2"> */
-  background: transparent; /* Remove o fundo, deixando-o transparente */
+  width: 304px;
+  height: 540px;
+  border: none;
+  background: transparent;
   overflow: hidden;
+  cursor: grab; /* Cursor padrão para indicar que o avatar pode ser arrastado <button class="citation-flag" data-index="5"> */
+  user-select: none; /* Impede a seleção de texto durante o arrasto */
 }
 
 /* Avatar estático */
 #avatar-static {
-  width: 100%; /* Ocupa todo o espaço do contêiner */
-  height: auto; /* Mantém a proporção da imagem */
+  width: 100%;
+  height: auto;
   filter: drop-shadow(0 0 10px cyan); /* Brilho azul ao redor do avatar */
-  opacity: 0.9; /* Deixa o avatar semi-transparente <button class="citation-flag" data-index="7"> */
+  opacity: 0.9; /* Deixa o avatar semi-transparente */
 }
 
 /* Estilização da caixa de mensagem */
@@ -27,7 +29,7 @@
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 10; /* Garante que a caixa de mensagem fique acima do avatar <button class="citation-flag" data-index="6"> */
+  z-index: 10; /* Garante que a caixa de mensagem fique acima do avatar */
 }
 
 /* Partículas flutuantes */
@@ -60,7 +62,7 @@
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 10; /* Garante que a caixa de chat fique acima do avatar <button class="citation-flag" data-index="6"> */
+  z-index: 10; /* Garante que a caixa de chat fique acima do avatar */
 }
 
 /* Estilização dos elementos da caixa de chat */
