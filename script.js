@@ -134,23 +134,23 @@ function createParticles() {
 
 createParticles();
 
-// Função para tornar o avatar e o chat arrastáveis
-function makeAvatarDraggable() {
-  const avatarChatContainer = document.getElementById('avatar-chat-container');
+// Função genérica para tornar um elemento arrastável
+function makeElementDraggable(elementId) {
+  const element = document.getElementById(elementId);
   let isDragging = false;
   let offsetX = 0;
   let offsetY = 0;
 
-  // Evento de início do arrasto (quando o usuário clica no avatar)
-  avatarChatContainer.addEventListener('mousedown', (e) => {
+  // Evento de início do arrasto (quando o usuário clica no elemento)
+  element.addEventListener('mousedown', (e) => {
     e.preventDefault(); // Impede o comportamento padrão de arrastar a imagem <button class="citation-flag" data-index="1">
     isDragging = true;
-    offsetX = e.clientX - avatarChatContainer.getBoundingClientRect().left;
-    offsetY = e.clientY - avatarChatContainer.getBoundingClientRect().top;
-    avatarChatContainer.style.cursor = 'grabbing'; // Altera o cursor para indicar arrasto
+    offsetX = e.clientX - element.getBoundingClientRect().left;
+    offsetY = e.clientY - element.getBoundingClientRect().top;
+    element.style.cursor = 'grabbing'; // Altera o cursor para indicar arrasto
   });
 
-  // Evento de movimento do mouse (enquanto o usuário arrasta o avatar)
+  // Evento de movimento do mouse (enquanto o usuário arrasta o elemento)
   document.addEventListener('mousemove', (e) => {
     if (isDragging) {
       e.preventDefault(); // Impede o comportamento padrão de arrastar a imagem <button class="citation-flag" data-index="1">
@@ -158,30 +158,31 @@ function makeAvatarDraggable() {
       const y = e.clientY - offsetY; // Calcula a posição vertical
 
       // Garantir que o elemento não saia dos limites da tela
-      const maxX = window.innerWidth - avatarChatContainer.offsetWidth;
-      const maxY = window.innerHeight - avatarChatContainer.offsetHeight;
+      const maxX = window.innerWidth - element.offsetWidth;
+      const maxY = window.innerHeight - element.offsetHeight;
 
-      avatarChatContainer.style.position = 'absolute';
-      avatarChatContainer.style.left = `${Math.min(Math.max(x, 0), maxX)}px`; // Limita o movimento horizontal
-      avatarChatContainer.style.top = `${Math.min(Math.max(y, 0), maxY)}px`; // Limita o movimento vertical
+      element.style.position = 'absolute';
+      element.style.left = `${Math.min(Math.max(x, 0), maxX)}px`; // Limita o movimento horizontal
+      element.style.top = `${Math.min(Math.max(y, 0), maxY)}px`; // Limita o movimento vertical
     }
   });
 
   // Evento de término do arrasto (quando o usuário solta o clique)
   document.addEventListener('mouseup', () => {
     isDragging = false;
-    avatarChatContainer.style.cursor = 'grab'; // Retorna o cursor ao estado normal
+    element.style.cursor = 'grab'; // Retorna o cursor ao estado normal
   });
 
-  // Alterar o cursor ao passar sobre o avatar
-  avatarChatContainer.addEventListener('mouseenter', () => {
-    avatarChatContainer.style.cursor = 'grab'; // Cursor de "clicar e arrastar"
+  // Alterar o cursor ao passar sobre o elemento
+  element.addEventListener('mouseenter', () => {
+    element.style.cursor = 'grab'; // Cursor de "clicar e arrastar"
   });
 
-  avatarChatContainer.addEventListener('mouseleave', () => {
-    avatarChatContainer.style.cursor = 'default'; // Cursor padrão quando fora do avatar
+  element.addEventListener('mouseleave', () => {
+    element.style.cursor = 'default'; // Cursor padrão quando fora do elemento
   });
 }
 
-// Inicializar a funcionalidade de arrastar
-makeAvatarDraggable();
+// Inicializar a funcionalidade de arrastar para o avatar e a caixa de diálogo
+makeElementDraggable('avatar-container');
+makeElementDraggable('chat-container');
