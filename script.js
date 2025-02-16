@@ -141,7 +141,7 @@ function makeAvatarDraggable() {
   let offsetX = 0;
   let offsetY = 0;
 
-  // Evento de início do arrasto
+  // Evento de início do arrasto (quando o usuário clica no avatar)
   avatarContainer.addEventListener('mousedown', (e) => {
     isDragging = true;
     offsetX = e.clientX - avatarContainer.getBoundingClientRect().left;
@@ -149,7 +149,7 @@ function makeAvatarDraggable() {
     avatarContainer.style.cursor = 'grabbing'; // Altera o cursor para indicar arrasto
   });
 
-  // Evento de movimento do mouse
+  // Evento de movimento do mouse (enquanto o usuário arrasta o avatar)
   document.addEventListener('mousemove', (e) => {
     if (isDragging) {
       const x = e.clientX - offsetX;
@@ -160,10 +160,19 @@ function makeAvatarDraggable() {
     }
   });
 
-  // Evento de término do arrasto
+  // Evento de término do arrasto (quando o usuário solta o clique)
   document.addEventListener('mouseup', () => {
     isDragging = false;
     avatarContainer.style.cursor = 'grab'; // Retorna o cursor ao estado normal
+  });
+
+  // Alterar o cursor ao passar sobre o avatar
+  avatarContainer.addEventListener('mouseenter', () => {
+    avatarContainer.style.cursor = 'grab'; // Cursor de "clicar e arrastar"
+  });
+
+  avatarContainer.addEventListener('mouseleave', () => {
+    avatarContainer.style.cursor = 'default'; // Cursor padrão quando fora do avatar
   });
 }
 
