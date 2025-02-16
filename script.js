@@ -198,3 +198,32 @@ function makeElementDraggable(elementId) {
 // Inicializar a funcionalidade de arrastar para o avatar e a caixa de diálogo
 makeElementDraggable('avatar-container');
 makeElementDraggable('chat-container');
+
+// Teste de funcionalidade api
+async function testQwenAPI() {
+  const apiKey = 'SUA_NOVA_API_KEY_AQUI'; // Substitua pela sua nova chave secreta
+  const apiUrl = 'https://api.qwen.com/v1/chat'; // Endpoint da API
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        prompt: 'Olá, como posso ajudar?',
+        max_tokens: 50
+      })
+    });
+
+    if (!response.ok) throw new Error('Erro ao processar resposta do Qwen');
+
+    const data = await response.json();
+    console.log('Resposta da API:', data);
+  } catch (error) {
+    console.error('Erro ao chamar a API do Qwen:', error);
+  }
+}
+
+testQwenAPI();
