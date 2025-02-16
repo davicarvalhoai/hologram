@@ -154,11 +154,11 @@ function makeAvatarDraggable() {
   document.addEventListener('mousemove', (e) => {
     if (isDragging) {
       e.preventDefault(); // Impede o comportamento padrão de arrastar a imagem <button class="citation-flag" data-index="1">
-      const x = e.clientX - offsetX;
-      const y = e.clientY - offsetY;
+      const x = e.clientX - offsetX; // Calcula a posição horizontal
+      const y = e.clientY - offsetY; // Calcula a posição vertical
       avatarChatContainer.style.position = 'absolute';
-      avatarChatContainer.style.left = `${x}px`;
-      avatarChatContainer.style.top = `${y}px`;
+      avatarChatContainer.style.left = `${x}px`; // Move horizontalmente
+      avatarChatContainer.style.top = `${y}px`; // Move verticalmente
     }
   });
 
