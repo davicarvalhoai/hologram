@@ -9,23 +9,22 @@
 <body>
   <!-- Sistema Holográfico -->
   <div id="hologram-system">
-    <!-- Contêiner principal para agrupar o avatar e o chat -->
-    <div id="avatar-chat-container">
-      <!-- Avatar -->
-      <div id="avatar-container">
-        <img id="avatar-static" src="https://davicarvalhoai.github.io/hologram/avatar.png" alt="Avatar Estático">
-        <!-- Partículas flutuantes -->
-        <div class="particle" style="top: 20%; left: 30%;"></div>
-        <div class="particle" style="top: 40%; left: 70%;"></div>
-        <div class="particle" style="top: 60%; left: 50%;"></div>
-      </div>
+    <!-- Contêiner do Avatar -->
+    <div id="avatar-container">
+      <img id="avatar-static" src="avatar.png" alt="Avatar Estático">
+      <!-- Partículas flutuantes -->
+      <div class="particle" style="top: 20%; left: 30%;"></div>
+      <div class="particle" style="top: 40%; left: 70%;"></div>
+      <div class="particle" style="top: 60%; left: 50%;"></div>
+    </div>
 
-      <!-- Caixa de mensagem inicial -->
-      <div id="message-box" style="display: none; text-align: center; margin-top: 20px;">
-        <p id="message-text">Olá, como posso te ajudar hoje?</p>
-      </div>
+    <!-- Caixa de mensagem inicial -->
+    <div id="message-box" style="display: none; text-align: center; margin-top: 20px;">
+      <p id="message-text">Olá, como posso te ajudar hoje?</p>
+    </div>
 
-      <!-- Caixa de chat -->
+    <!-- Contêiner da Caixa de Diálogo -->
+    <div id="chat-container">
       <div id="chat-box">
         <input id="chat-input" type="text" placeholder="Digite sua mensagem..." />
         <button id="send-button">Enviar</button>
