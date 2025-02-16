@@ -1,3 +1,47 @@
+// Função para escolher animações aleatórias
+function playRandomAnimation() {
+  const animations = ['smile', 'wave', 'idle'];
+  const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+  const avatar = document.getElementById('avatar-static');
+
+  if (randomAnimation === 'smile') {
+    avatar.style.transform = 'scaleY(0.9)';
+    setTimeout(() => {
+      avatar.style.transform = 'scaleY(1)';
+    }, 1000);
+  } else if (randomAnimation === 'wave') {
+    avatar.style.transform = 'rotate(-10deg)';
+    setTimeout(() => {
+      avatar.style.transform = 'rotate(0deg)';
+    }, 1000);
+  } else {
+    avatar.style.transform = 'rotate(2deg)';
+    setTimeout(() => {
+      avatar.style.transform = 'rotate(-2deg)';
+    }, 500);
+  }
+}
+
+// Iniciar animações aleatórias a cada 5 segundos
+setInterval(playRandomAnimation, 5000);
+
+// Função para fazer o avatar reagir ao scroll
+window.addEventListener('scroll', () => {
+  const avatar = document.getElementById('avatar-static');
+  avatar.style.transform = `rotate(${window.scrollY * 0.1}deg)`;
+});
+
+// Exibir mensagem inicial ao carregar o site
+document.addEventListener('DOMContentLoaded', () => {
+  const messageBox = document.getElementById('message-box');
+  messageBox.style.display = 'block';
+
+  // Esconder mensagem após 3 segundos
+  setTimeout(() => {
+    messageBox.style.display = 'none';
+  }, 3000);
+});
+
 // Função para adicionar mensagens à interface
 function addMessage(sender, message) {
   const messagesContainer = document.getElementById('messages');
