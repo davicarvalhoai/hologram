@@ -83,33 +83,45 @@ function syncLips(duration) {
   }, duration);
 }
 
-// Função para processar a entrada do usuário
+// Função para enviar solicitações à API do Qwen
+async function callQwenAPI(userInput) {
+  const apiKey = 'btZC2kmbrF34SYaTvuCtbqrkSuUdz9'; // Substitua pela sua chave secreta <button class="citation-flag" data-index="5">
+  const apiUrl = 'https://api.qwen.com/v1/chat'; // Endpoint da API
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        prompt: userInput,
+        max_tokens: 50
+      })
+    });
+
+    if (!response.ok) throw new Error('Erro ao processar resposta do Qwen');
+
+    const data = await response.json();
+    return data.response || 'Desculpe, não consegui entender.';
+  } catch (error) {
+    console.error('Erro ao chamar a API do Qwen:', error);
+    return 'Ocorreu um erro ao processar sua solicitação.';
+  }
+}
+
+// Função para processar a entrada do usuário e interagir com o chatbot
 document.getElementById('send-button').addEventListener('click', async () => {
   const input = document.getElementById('chat-input').value;
 
   if (!input.trim()) return alert('Por favor, digite uma mensagem.');
 
   try {
-    // Enviar pergunta para a API do chatbot
-    const response = await fetch('https://api.dialogflow.com/v1/query', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer sua-chave-de-api-aqui'
-      },
-      body: JSON.stringify({
-        query: input,
-        lang: 'pt-br',
-        sessionId: '123456'
-      })
-    });
+    // Chamar a API do Qwen
+    const answer = await callQwenAPI(input);
 
-    if (!response.ok) throw new Error('Erro ao processar resposta do chatbot');
-
-    const data = await response.json();
-    const answer = data.result.fulfillment.speech;
-
-    // Exibir resposta
+    // Exibir resposta na interface
     alert(answer);
 
     // Gerar áudio e sincronizar lábios
