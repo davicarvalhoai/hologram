@@ -4,6 +4,11 @@ function playRandomAnimation() {
   const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
   const avatar = document.getElementById('avatar-static');
 
+  if (!avatar) {
+    console.error('Elemento #avatar-static não encontrado no DOM.');
+    return;
+  }
+
   if (randomAnimation === 'smile') {
     avatar.style.transform = 'scaleY(0.9)';
     setTimeout(() => {
@@ -28,6 +33,12 @@ setInterval(playRandomAnimation, 5000);
 // Função para fazer o avatar reagir ao scroll
 window.addEventListener('scroll', () => {
   const avatar = document.getElementById('avatar-static');
+
+  if (!avatar) {
+    console.error('Elemento #avatar-static não encontrado no DOM.');
+    return;
+  }
+
   avatar.style.transform = `rotate(${window.scrollY * 0.1}deg)`;
 });
 
