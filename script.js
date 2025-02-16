@@ -1,46 +1,14 @@
-// Função para escolher animações aleatórias
-function playRandomAnimation() {
-  const animations = ['smile', 'wave', 'idle'];
-  const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
-  const avatar = document.getElementById('avatar-static');
+// Função para adicionar mensagens à interface
+function addMessage(sender, message) {
+  const messagesContainer = document.getElementById('messages');
+  const messageElement = document.createElement('div');
+  messageElement.classList.add('message', sender);
+  messageElement.textContent = message;
+  messagesContainer.appendChild(messageElement);
 
-  if (randomAnimation === 'smile') {
-    avatar.style.transform = 'scaleY(0.9)';
-    setTimeout(() => {
-      avatar.style.transform = 'scaleY(1)';
-    }, 1000);
-  } else if (randomAnimation === 'wave') {
-    avatar.style.transform = 'rotate(-10deg)';
-    setTimeout(() => {
-      avatar.style.transform = 'rotate(0deg)';
-    }, 1000);
-  } else {
-    avatar.style.transform = 'rotate(2deg)';
-    setTimeout(() => {
-      avatar.style.transform = 'rotate(-2deg)';
-    }, 500);
-  }
+  // Rolar automaticamente para a última mensagem
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
-
-// Iniciar animações aleatórias a cada 5 segundos
-setInterval(playRandomAnimation, 5000);
-
-// Função para fazer o avatar reagir ao scroll
-window.addEventListener('scroll', () => {
-  const avatar = document.getElementById('avatar-static');
-  avatar.style.transform = `rotate(${window.scrollY * 0.1}deg)`;
-});
-
-// Exibir mensagem inicial ao carregar o site
-document.addEventListener('DOMContentLoaded', () => {
-  const messageBox = document.getElementById('message-box');
-  messageBox.style.display = 'block';
-
-  // Esconder mensagem após 3 segundos
-  setTimeout(() => {
-    messageBox.style.display = 'none';
-  }, 3000);
-});
 
 // Função para gerar áudio com IA
 async function generateAudio(text) {
@@ -85,7 +53,7 @@ function syncLips(duration) {
 
 // Função para enviar solicitações à API do Qwen
 async function callQwenAPI(userInput) {
-  const apiKey = 'SUA_ACCESS_KEY_SECRET_AQUI'; // Substitua pela sua chave secreta <button class="citation-flag" data-index="5">
+  const apiKey = 'SUA_NOVA_API_KEY_AQUI'; // Substitua pela sua nova chave secreta <button class="citation-flag" data-index="4">
   const apiUrl = 'https://api.qwen.com/v1/chat'; // Endpoint da API
 
   try {
@@ -113,16 +81,23 @@ async function callQwenAPI(userInput) {
 
 // Função para processar a entrada do usuário e interagir com o chatbot
 document.getElementById('send-button').addEventListener('click', async () => {
-  const input = document.getElementById('chat-input').value;
+  const input = document.getElementById('chat-input');
+  const userMessage = input.value.trim();
 
-  if (!input.trim()) return alert('Por favor, digite uma mensagem.');
+  if (!userMessage) return alert('Por favor, digite uma mensagem.');
+
+  // Adicionar mensagem do usuário à interface
+  addMessage('user', userMessage);
+
+  // Limpar o campo de entrada
+  input.value = '';
 
   try {
     // Chamar a API do Qwen
-    const answer = await callQwenAPI(input);
+    const answer = await callQwenAPI(userMessage);
 
-    // Exibir resposta na interface
-    alert(answer);
+    // Adicionar resposta do bot à interface
+    addMessage('bot', answer);
 
     // Gerar áudio e sincronizar lábios
     generateAudio(answer);
@@ -131,99 +106,9 @@ document.getElementById('send-button').addEventListener('click', async () => {
   }
 });
 
-// Função para criar partículas flutuantes dinâmicas
-function createParticles() {
-  const container = document.getElementById('avatar-container');
-  for (let i = 0; i < 10; i++) {
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
-    particle.style.top = `${Math.random() * 100}%`;
-    particle.style.left = `${Math.random() * 100}%`;
-    particle.style.animationDuration = `${Math.random() * 3 + 2}s`;
-    container.appendChild(particle);
+// Permitir envio ao pressionar Enter
+document.getElementById('chat-input').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    document.getElementById('send-button').click();
   }
-}
-
-createParticles();
-
-// Função genérica para tornar um elemento arrastável
-function makeElementDraggable(elementId) {
-  const element = document.getElementById(elementId);
-  let isDragging = false;
-  let offsetX = 0;
-  let offsetY = 0;
-
-  // Evento de início do arrasto (quando o usuário clica no elemento)
-  element.addEventListener('mousedown', (e) => {
-    e.preventDefault(); // Impede o comportamento padrão de arrastar a imagem <button class="citation-flag" data-index="1">
-    isDragging = true;
-    offsetX = e.clientX - element.getBoundingClientRect().left;
-    offsetY = e.clientY - element.getBoundingClientRect().top;
-    element.style.cursor = 'grabbing'; // Altera o cursor para indicar arrasto
-  });
-
-  // Evento de movimento do mouse (enquanto o usuário arrasta o elemento)
-  document.addEventListener('mousemove', (e) => {
-    if (isDragging) {
-      e.preventDefault(); // Impede o comportamento padrão de arrastar a imagem <button class="citation-flag" data-index="1">
-      const x = e.clientX - offsetX; // Calcula a posição horizontal
-      const y = e.clientY - offsetY; // Calcula a posição vertical
-
-      // Garantir que o elemento não saia dos limites da tela
-      const maxX = window.innerWidth - element.offsetWidth;
-      const maxY = window.innerHeight - element.offsetHeight;
-
-      element.style.position = 'absolute';
-      element.style.left = `${Math.min(Math.max(x, 0), maxX)}px`; // Limita o movimento horizontal
-      element.style.top = `${Math.min(Math.max(y, 0), maxY)}px`; // Limita o movimento vertical
-    }
-  });
-
-  // Evento de término do arrasto (quando o usuário solta o clique)
-  document.addEventListener('mouseup', () => {
-    isDragging = false;
-    element.style.cursor = 'grab'; // Retorna o cursor ao estado normal
-  });
-
-  // Alterar o cursor ao passar sobre o elemento
-  element.addEventListener('mouseenter', () => {
-    element.style.cursor = 'grab'; // Cursor de "clicar e arrastar"
-  });
-
-  element.addEventListener('mouseleave', () => {
-    element.style.cursor = 'default'; // Cursor padrão quando fora do elemento
-  });
-}
-
-// Inicializar a funcionalidade de arrastar para o avatar e a caixa de diálogo
-makeElementDraggable('avatar-container');
-makeElementDraggable('chat-container');
-
-// Teste de funcionalidade api
-async function testQwenAPI() {
-  const apiKey = 'sk-37eca6f0da0445a49a424d9aa9fc9c27'; // Substitua pela sua nova chave secreta
-  const apiUrl = 'https://api.qwen.com/v1/chat'; // Endpoint da API
-
-  try {
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      },
-      body: JSON.stringify({
-        prompt: 'Olá, como posso ajudar?',
-        max_tokens: 50
-      })
-    });
-
-    if (!response.ok) throw new Error('Erro ao processar resposta do Qwen');
-
-    const data = await response.json();
-    console.log('Resposta da API:', data);
-  } catch (error) {
-    console.error('Erro ao chamar a API do Qwen:', error);
-  }
-}
-
-testQwenAPI();
+});
