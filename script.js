@@ -156,9 +156,14 @@ function makeAvatarDraggable() {
       e.preventDefault(); // Impede o comportamento padrão de arrastar a imagem <button class="citation-flag" data-index="1">
       const x = e.clientX - offsetX; // Calcula a posição horizontal
       const y = e.clientY - offsetY; // Calcula a posição vertical
+
+      // Garantir que o elemento não saia dos limites da tela
+      const maxX = window.innerWidth - avatarChatContainer.offsetWidth;
+      const maxY = window.innerHeight - avatarChatContainer.offsetHeight;
+
       avatarChatContainer.style.position = 'absolute';
-      avatarChatContainer.style.left = `${x}px`; // Move horizontalmente
-      avatarChatContainer.style.top = `${y}px`; // Move verticalmente
+      avatarChatContainer.style.left = `${Math.min(Math.max(x, 0), maxX)}px`; // Limita o movimento horizontal
+      avatarChatContainer.style.top = `${Math.min(Math.max(y, 0), maxY)}px`; // Limita o movimento vertical
     }
   });
 
