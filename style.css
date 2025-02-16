@@ -1,6 +1,22 @@
+/* Estilização geral */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* Iframe */
+#test-iframe {
+  width: 100%;
+  height: 100vh;
+  border: none;
+  z-index: 1;
+}
+
 /* Estilização do contêiner do avatar */
 #avatar-container {
-  position: absolute; /* Permite mover o avatar livremente pela tela */
+  position: absolute;
   bottom: 20px;
   right: 20px;
   width: 304px;
@@ -8,18 +24,18 @@
   border: none;
   background: transparent;
   overflow: hidden;
-  cursor: grab; /* Cursor padrão para indicar que o avatar pode ser arrastado */
-  user-select: none; /* Impede a seleção de texto durante o arrasto */
-  z-index: 9999; /* Garante que o avatar fique acima de outros elementos <button class="citation-flag" data-index="5"> */
+  cursor: default;
+  user-select: none;
+  z-index: 9999;
 }
 
 /* Avatar estático */
 #avatar-static {
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 0 10px cyan); /* Brilho azul ao redor do avatar */
-  opacity: 0.9; /* Deixa o avatar semi-transparente */
-  pointer-events: none; /* Impede que a imagem seja arrastada pelo sistema <button class="citation-flag" data-index="1"> */
+  filter: drop-shadow(0 0 10px cyan);
+  opacity: 0.9;
+  pointer-events: none;
 }
 
 /* Partículas flutuantes */
@@ -43,58 +59,65 @@
   }
 }
 
-/* Estilização da caixa de mensagem inicial */
-#message-box {
+/* Nova Caixa de Diálogo Fixa */
+#chatbox {
   position: fixed;
-  bottom: 240px;
-  right: 20px;
-  background: white;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 9999; /* Garante que a caixa de mensagem fique acima do avatar */
-}
-
-/* Estilização do contêiner da caixa de diálogo */
-#chat-container {
-  position: absolute; /* Permite mover a caixa de diálogo livremente pela tela */
   bottom: 20px;
   right: 20px;
+  width: 350px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Alinha os elementos à esquerda */
-  cursor: grab; /* Cursor padrão para indicar que a caixa de diálogo pode ser arrastada */
-  user-select: none; /* Impede a seleção de texto durante o arrasto */
-  z-index: 9999; /* Garante que a caixa de diálogo fique acima de outros elementos <button class="citation-flag" data-index="5"> */
+  z-index: 9999;
 }
 
-/* Estilização da caixa de diálogo */
-#chat-box {
-  background: rgba(255, 255, 255, 0.9);
+/* Área de mensagens */
+#messages {
+  flex: 1;
   padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 9999; /* Garante que a caixa de diálogo fique acima de outros elementos <button class="citation-flag" data-index="5"> */
+  max-height: 300px;
+  overflow-y: auto;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Estilização dos elementos da caixa de diálogo */
+/* Mensagens do usuário e do bot */
+.message.user {
+  text-align: right;
+  color: #007bff;
+}
+
+.message.bot {
+  text-align: left;
+  color: #333;
+}
+
+/* Área de entrada */
+#input-area {
+  display: flex;
+  padding: 10px;
+  background: #f9f9f9;
+}
+
 #chat-input {
-  width: 200px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
 }
 
 #send-button {
   margin-left: 10px;
-  padding: 5px 10px;
-  background: #1abc9c;
+  padding: 8px 12px;
+  background: #007bff;
   color: white;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
 #send-button:hover {
-  background: #16a085;
+  background: #0056b3;
 }
