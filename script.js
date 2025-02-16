@@ -134,45 +134,47 @@ function createParticles() {
 
 createParticles();
 
-// Função para tornar o avatar arrastável
+// Função para tornar o avatar e o chat arrastáveis
 function makeAvatarDraggable() {
-  const avatarContainer = document.getElementById('avatar-container');
+  const avatarChatContainer = document.getElementById('avatar-chat-container');
   let isDragging = false;
   let offsetX = 0;
   let offsetY = 0;
 
   // Evento de início do arrasto (quando o usuário clica no avatar)
-  avatarContainer.addEventListener('mousedown', (e) => {
+  avatarChatContainer.addEventListener('mousedown', (e) => {
+    e.preventDefault(); // Impede o comportamento padrão de arrastar a imagem <button class="citation-flag" data-index="1">
     isDragging = true;
-    offsetX = e.clientX - avatarContainer.getBoundingClientRect().left;
-    offsetY = e.clientY - avatarContainer.getBoundingClientRect().top;
-    avatarContainer.style.cursor = 'grabbing'; // Altera o cursor para indicar arrasto
+    offsetX = e.clientX - avatarChatContainer.getBoundingClientRect().left;
+    offsetY = e.clientY - avatarChatContainer.getBoundingClientRect().top;
+    avatarChatContainer.style.cursor = 'grabbing'; // Altera o cursor para indicar arrasto
   });
 
   // Evento de movimento do mouse (enquanto o usuário arrasta o avatar)
   document.addEventListener('mousemove', (e) => {
     if (isDragging) {
+      e.preventDefault(); // Impede o comportamento padrão de arrastar a imagem <button class="citation-flag" data-index="1">
       const x = e.clientX - offsetX;
       const y = e.clientY - offsetY;
-      avatarContainer.style.position = 'absolute';
-      avatarContainer.style.left = `${x}px`;
-      avatarContainer.style.top = `${y}px`;
+      avatarChatContainer.style.position = 'absolute';
+      avatarChatContainer.style.left = `${x}px`;
+      avatarChatContainer.style.top = `${y}px`;
     }
   });
 
   // Evento de término do arrasto (quando o usuário solta o clique)
   document.addEventListener('mouseup', () => {
     isDragging = false;
-    avatarContainer.style.cursor = 'grab'; // Retorna o cursor ao estado normal
+    avatarChatContainer.style.cursor = 'grab'; // Retorna o cursor ao estado normal
   });
 
   // Alterar o cursor ao passar sobre o avatar
-  avatarContainer.addEventListener('mouseenter', () => {
-    avatarContainer.style.cursor = 'grab'; // Cursor de "clicar e arrastar"
+  avatarChatContainer.addEventListener('mouseenter', () => {
+    avatarChatContainer.style.cursor = 'grab'; // Cursor de "clicar e arrastar"
   });
 
-  avatarContainer.addEventListener('mouseleave', () => {
-    avatarContainer.style.cursor = 'default'; // Cursor padrão quando fora do avatar
+  avatarChatContainer.addEventListener('mouseleave', () => {
+    avatarChatContainer.style.cursor = 'default'; // Cursor padrão quando fora do avatar
   });
 }
 
