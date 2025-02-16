@@ -85,7 +85,7 @@ function syncLips(duration) {
 
 // Função para enviar solicitações à API do Qwen
 async function callQwenAPI(userInput) {
-  const apiKey = 'btZC2kmbrF34SYaTvuCtbqrkSuUdz9'; // Substitua pela sua chave secreta <button class="citation-flag" data-index="5">
+  const apiKey = 'SUA_ACCESS_KEY_SECRET_AQUI'; // Substitua pela sua chave secreta <button class="citation-flag" data-index="5">
   const apiUrl = 'https://api.qwen.com/v1/chat'; // Endpoint da API
 
   try {
