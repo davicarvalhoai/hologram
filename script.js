@@ -133,3 +133,39 @@ function createParticles() {
 }
 
 createParticles();
+
+// Função para tornar o avatar arrastável
+function makeAvatarDraggable() {
+  const avatarContainer = document.getElementById('avatar-container');
+  let isDragging = false;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  // Evento de início do arrasto
+  avatarContainer.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offsetX = e.clientX - avatarContainer.getBoundingClientRect().left;
+    offsetY = e.clientY - avatarContainer.getBoundingClientRect().top;
+    avatarContainer.style.cursor = 'grabbing'; // Altera o cursor para indicar arrasto
+  });
+
+  // Evento de movimento do mouse
+  document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+      const x = e.clientX - offsetX;
+      const y = e.clientY - offsetY;
+      avatarContainer.style.position = 'absolute';
+      avatarContainer.style.left = `${x}px`;
+      avatarContainer.style.top = `${y}px`;
+    }
+  });
+
+  // Evento de término do arrasto
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    avatarContainer.style.cursor = 'grab'; // Retorna o cursor ao estado normal
+  });
+}
+
+// Inicializar a funcionalidade de arrastar
+makeAvatarDraggable();
