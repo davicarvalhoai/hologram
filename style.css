@@ -1,14 +1,22 @@
-/* Estilização do contêiner do avatar */
-#avatar-container {
-  position: absolute; /* Permite mover o avatar livremente pela tela <button class="citation-flag" data-index="5"> */
+/* Estilização do contêiner principal que agrupa o avatar e o chat */
+#avatar-chat-container {
+  position: absolute; /* Permite mover o grupo livremente pela tela <button class="citation-flag" data-index="4"> */
   bottom: 20px;
   right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Alinha os elementos à direita */
+}
+
+/* Estilização do contêiner do avatar */
+#avatar-container {
+  position: relative; /* Posicionamento relativo dentro do contêiner pai */
   width: 304px;
   height: 540px;
   border: none;
   background: transparent;
   overflow: hidden;
-  cursor: grab; /* Cursor padrão para indicar que o avatar pode ser arrastado <button class="citation-flag" data-index="5"> */
+  cursor: grab; /* Cursor padrão para indicar que o avatar pode ser arrastado */
   user-select: none; /* Impede a seleção de texto durante o arrasto */
 }
 
@@ -18,6 +26,7 @@
   height: auto;
   filter: drop-shadow(0 0 10px cyan); /* Brilho azul ao redor do avatar */
   opacity: 0.9; /* Deixa o avatar semi-transparente */
+  pointer-events: none; /* Impede que a imagem seja arrastada pelo sistema <button class="citation-flag" data-index="1"> */
 }
 
 /* Estilização da caixa de mensagem */
@@ -55,14 +64,12 @@
 
 /* Caixa de chat */
 #chat-box {
-  position: fixed;
-  bottom: 100px;
-  right: 20px;
+  margin-top: 10px; /* Espaçamento entre o avatar e o chat */
   background: rgba(255, 255, 255, 0.9);
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 10; /* Garante que a caixa de chat fique acima do avatar */
+  z-index: 10; /* Garante que a caixa de chat fique acima de outros elementos */
 }
 
 /* Estilização dos elementos da caixa de chat */
