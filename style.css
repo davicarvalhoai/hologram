@@ -1,8 +1,8 @@
 /* Estilização do contêiner do avatar */
 #avatar-container {
   position: absolute; /* Permite mover o avatar livremente pela tela */
-  bottom: 20px;
-  right: 20px;
+  bottom: 20px; /* Posiciona no canto inferior */
+  right: 20px; /* Posiciona no canto direito */
   width: 304px;
   height: 540px;
   border: none;
@@ -10,6 +10,7 @@
   overflow: hidden;
   cursor: grab; /* Cursor padrão para indicar que o avatar pode ser arrastado */
   user-select: none; /* Impede a seleção de texto durante o arrasto */
+  z-index: 9999; /* Garante que o avatar fique acima de outros elementos <button class="citation-flag" data-index="5"> */
 }
 
 /* Avatar estático */
@@ -51,19 +52,20 @@
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 10; /* Garante que a caixa de mensagem fique acima do avatar */
+  z-index: 9999; /* Garante que a caixa de mensagem fique acima do avatar */
 }
 
 /* Estilização do contêiner da caixa de diálogo */
 #chat-container {
   position: absolute; /* Permite mover a caixa de diálogo livremente pela tela */
-  bottom: 20px;
-  left: 20px;
+  bottom: 20px; /* Posiciona no canto inferior */
+  right: 20px; /* Posiciona no canto direito */
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* Alinha os elementos à esquerda */
   cursor: grab; /* Cursor padrão para indicar que a caixa de diálogo pode ser arrastada */
   user-select: none; /* Impede a seleção de texto durante o arrasto */
+  z-index: 9999; /* Garante que a caixa de diálogo fique acima de outros elementos <button class="citation-flag" data-index="5"> */
 }
 
 /* Estilização da caixa de diálogo */
@@ -72,7 +74,7 @@
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 10; /* Garante que a caixa de diálogo fique acima de outros elementos */
+  z-index: 9999; /* Garante que a caixa de diálogo fique acima de outros elementos <button class="citation-flag" data-index="5"> */
 }
 
 /* Estilização dos elementos da caixa de diálogo */
