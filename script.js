@@ -201,7 +201,7 @@ makeElementDraggable('chat-container');
 
 // Teste de funcionalidade api
 async function testQwenAPI() {
-  const apiKey = 'SUA_NOVA_API_KEY_AQUI'; // Substitua pela sua nova chave secreta
+  const apiKey = 'sk-37eca6f0da0445a49a424d9aa9fc9c27'; // Substitua pela sua nova chave secreta
   const apiUrl = 'https://api.qwen.com/v1/chat'; // Endpoint da API
 
   try {
