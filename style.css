@@ -1,16 +1,8 @@
-/* Estilização do contêiner principal que agrupa o avatar e o chat */
-#avatar-chat-container {
-  position: absolute; /* Permite mover o grupo livremente pela tela <button class="citation-flag" data-index="4"> */
-  bottom: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* Alinha os elementos à direita */
-}
-
 /* Estilização do contêiner do avatar */
 #avatar-container {
-  position: relative; /* Posicionamento relativo dentro do contêiner pai */
+  position: absolute; /* Permite mover o avatar livremente pela tela */
+  bottom: 20px;
+  right: 20px;
   width: 304px;
   height: 540px;
   border: none;
@@ -27,18 +19,6 @@
   filter: drop-shadow(0 0 10px cyan); /* Brilho azul ao redor do avatar */
   opacity: 0.9; /* Deixa o avatar semi-transparente */
   pointer-events: none; /* Impede que a imagem seja arrastada pelo sistema <button class="citation-flag" data-index="1"> */
-}
-
-/* Estilização da caixa de mensagem */
-#message-box {
-  position: fixed;
-  bottom: 240px;
-  right: 20px;
-  background: white;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 10; /* Garante que a caixa de mensagem fique acima do avatar */
 }
 
 /* Partículas flutuantes */
@@ -62,17 +42,40 @@
   }
 }
 
-/* Caixa de chat */
+/* Estilização da caixa de mensagem inicial */
+#message-box {
+  position: fixed;
+  bottom: 240px;
+  right: 20px;
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10; /* Garante que a caixa de mensagem fique acima do avatar */
+}
+
+/* Estilização do contêiner da caixa de diálogo */
+#chat-container {
+  position: absolute; /* Permite mover a caixa de diálogo livremente pela tela */
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinha os elementos à esquerda */
+  cursor: grab; /* Cursor padrão para indicar que a caixa de diálogo pode ser arrastada */
+  user-select: none; /* Impede a seleção de texto durante o arrasto */
+}
+
+/* Estilização da caixa de diálogo */
 #chat-box {
-  margin-top: 10px; /* Espaçamento entre o avatar e o chat */
   background: rgba(255, 255, 255, 0.9);
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 10; /* Garante que a caixa de chat fique acima de outros elementos */
+  z-index: 10; /* Garante que a caixa de diálogo fique acima de outros elementos */
 }
 
-/* Estilização dos elementos da caixa de chat */
+/* Estilização dos elementos da caixa de diálogo */
 #chat-input {
   width: 200px;
   padding: 5px;
