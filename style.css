@@ -1,8 +1,8 @@
 /* Estilização do contêiner do avatar */
 #avatar-container {
   position: absolute; /* Permite mover o avatar livremente pela tela */
-  bottom: 20px; /* Posiciona no canto inferior */
-  right: 20px; /* Posiciona no canto direito */
+  bottom: 20px;
+  right: 20px;
   width: 304px;
   height: 540px;
   border: none;
@@ -58,8 +58,8 @@
 /* Estilização do contêiner da caixa de diálogo */
 #chat-container {
   position: absolute; /* Permite mover a caixa de diálogo livremente pela tela */
-  bottom: 20px; /* Posiciona no canto inferior */
-  right: 20px; /* Posiciona no canto direito */
+  bottom: 20px;
+  right: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* Alinha os elementos à esquerda */
