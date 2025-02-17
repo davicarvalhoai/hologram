@@ -78,13 +78,13 @@ function addMessageToChat(message, className) {
   chatBody.scrollTop = chatBody.scrollHeight;
 }
 
-// Função para enviar mensagem ao chatbot Qwen usando proxy CORS
+// Função para enviar mensagem ao chatbot Qwen usando proxy CORS personalizado
 async function sendMessageToChatbot(message) {
-  const proxyUrl = 'https://cors-anywhere.herokuapp.com/'; // Proxy CORS <button class="citation-flag" data-index="1">
+  const proxyUrl = 'https://hologram.davicarvalhodrive.workers.dev/?url='; // Proxy CORS personalizado <button class="citation-flag" data-index="1">
   const apiUrl = 'https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation';
 
   try {
-    const response = await fetch(proxyUrl + apiUrl, {
+    const response = await fetch(proxyUrl + encodeURIComponent(apiUrl), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
