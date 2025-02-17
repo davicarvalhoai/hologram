@@ -2,7 +2,7 @@
 function playRandomAnimation() {
   const animations = ['smile', 'wave', 'idle'];
   const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
-  const avatar = document.getElementById('avatar-video'); // Alterado de 'avatar-static' para 'avatar-video'
+  const avatar = document.getElementById('avatar-static');
   if (randomAnimation === 'smile') {
     avatar.style.transform = 'scaleY(0.9)';
     setTimeout(() => {
@@ -26,7 +26,7 @@ setInterval(playRandomAnimation, 5000);
 
 // Função para fazer o avatar reagir ao scroll
 window.addEventListener('scroll', () => {
-  const avatar = document.getElementById('avatar-video'); // Alterado de 'avatar-static' para 'avatar-video'
+  const avatar = document.getElementById('avatar-static');
   avatar.style.transform = `rotate(${window.scrollY * 0.1}deg)`;
 });
 
@@ -69,7 +69,7 @@ async function generateAudio(text) {
 
 // Função para sincronizar os lábios
 function syncLips(duration) {
-  const avatar = document.getElementById('avatar-video'); // Alterado de 'avatar-static' para 'avatar-video'
+  const avatar = document.getElementById('avatar-static');
   avatar.style.transform = 'scaleY(0.9)';
   setTimeout(() => {
     avatar.style.transform = 'scaleY(1)';
