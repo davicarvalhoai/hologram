@@ -44,6 +44,106 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 3000);
 });
 
+// Função para processar a entrada do usuário
+document.getElementById('send-button').addEventListener('click', async () => {
+  const input = document.getElementById('chat-input').value;
+  if (!input.trim()) return alert('Por favor, digite uma mensagem.');
+
+  try {
+    // Adiciona a mensagem do usuário à caixa de diálogo
+    addMessageToChat(input, 'user-message');
+
+    // Enviar mensagem ao chatbot
+    const answer = await sendMessageToChatbot(input);
+
+    // Adiciona a resposta do chatbot à caixa de diálogo
+    addMessageToChat(answer, 'bot-message');
+
+    // Limpa o campo de entrada
+    document.getElementById('chat-input').value = '';
+  } catch (error) {
+    console.error('Erro ao processar chatbot:', error);
+  }
+});
+
+// Função para adicionar mensagens à caixa de diálogo
+function addMessageToChat(message, className) {
+  const chatBody = document.getElementById('chat-body');
+  const messageElement = document.createElement('div');
+  messageElement.classList.add('chat-message', className);
+  messageElement.textContent = message;
+  chatBody.appendChild(messageElement);
+
+  // Rola automaticamente para a última mensagem
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+// Função para enviar mensagem ao chatbot Qwen
+async function sendMessageToChatbot(message) {
+  try {
+    const response = await fetch('https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer sk-37eca6f0da0445a49a424d9aa9fc9c27' // Chave API fornecida <button class="citation-flag" data-index="1">
+      },
+      body: JSON.stringify({
+        model: 'qwen',
+        input: {
+          prompt: message
+        },
+        parameters: {
+          max_tokens: 100
+        }
+      })
+    });
+
+    if (!response.ok) throw new Error('Erro ao processar resposta do chatbot');
+    const data = await response.json();
+    return data.output.text;
+  } catch (error) {
+    console.error('Erro ao comunicar com o chatbot:', error);
+    return 'Desculpe, ocorreu um erro ao processar sua solicitação.';
+  }
+}
+
+// Função para gerar áudio com IA
+async function generateAudio(text) {
+  try {
+    const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/voice-id', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'xi-api-key': 'sua-chave-de-api-elevenlabs-aqui' // Substitua pela sua chave ElevenLabs, se necessário
+      },
+      body: JSON.stringify({
+        text: text,
+        voice_settings: {
+          stability: 0.5,
+          similarity_boost: 0.7
+        }
+      })
+    });
+    if (!response.ok) throw new Error('Erro ao gerar áudio');
+    const audioBlob = await response.blob();
+    const audioUrl = URL.createObjectURL(audioBlob);
+    const audio = new Audio(audioUrl);
+    audio.play();
+    syncLips(audio.duration * 1000);
+  } catch (error) {
+    console.error('Erro ao processar áudio:', error);
+  }
+}
+
+// Função para sincronizar os lábios
+function syncLips(duration) {
+  const avatar = document.getElementById('avatar-static');
+  avatar.style.transform = 'scaleY(0.9)';
+  setTimeout(() => {
+    avatar.style.transform = 'scaleY(1)';
+  }, duration);
+}
+
 // Função genérica para tornar um elemento arrastável
 function makeElementDraggable(elementId) {
   const element = document.getElementById(elementId);
@@ -57,7 +157,7 @@ function makeElementDraggable(elementId) {
     offsetX = e.clientX - element.getBoundingClientRect().left;
     offsetY = e.clientY - element.getBoundingClientRect().top;
     element.style.cursor = 'grabbing';
-    element.style.position = 'fixed'; // Altera para fixed ao iniciar o arrasto <button class="citation-flag" data-index="1">
+    element.style.position = 'fixed'; // Altera para fixed ao iniciar o arrasto
   });
 
   document.addEventListener('mousemove', (e) => {
