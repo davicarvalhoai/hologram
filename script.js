@@ -2,8 +2,7 @@
 function playRandomAnimation() {
   const animations = ['smile', 'wave', 'idle'];
   const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
-  const avatar = document.getElementById('avatar-static');
-
+  const avatar = document.getElementById('avatar-video'); // Alterado de 'avatar-static' para 'avatar-video'
   if (randomAnimation === 'smile') {
     avatar.style.transform = 'scaleY(0.9)';
     setTimeout(() => {
@@ -27,7 +26,7 @@ setInterval(playRandomAnimation, 5000);
 
 // Função para fazer o avatar reagir ao scroll
 window.addEventListener('scroll', () => {
-  const avatar = document.getElementById('avatar-static');
+  const avatar = document.getElementById('avatar-video'); // Alterado de 'avatar-static' para 'avatar-video'
   avatar.style.transform = `rotate(${window.scrollY * 0.1}deg)`;
 });
 
@@ -35,8 +34,6 @@ window.addEventListener('scroll', () => {
 document.addEventListener('DOMContentLoaded', () => {
   const messageBox = document.getElementById('message-box');
   messageBox.style.display = 'block';
-
-  // Esconder mensagem após 3 segundos
   setTimeout(() => {
     messageBox.style.display = 'none';
   }, 3000);
@@ -49,7 +46,7 @@ async function generateAudio(text) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'xi-api-key': 'sk_86d347fa7bd06faec8520e86014f87f86765c66ed1a56a87'
+        'xi-api-key': 'sua-chave-de-api-aqui'
       },
       body: JSON.stringify({
         text: text,
@@ -59,15 +56,11 @@ async function generateAudio(text) {
         }
       })
     });
-
     if (!response.ok) throw new Error('Erro ao gerar áudio');
-
     const audioBlob = await response.blob();
     const audioUrl = URL.createObjectURL(audioBlob);
     const audio = new Audio(audioUrl);
     audio.play();
-
-    // Sincronizar lábios com o áudio
     syncLips(audio.duration * 1000);
   } catch (error) {
     console.error('Erro ao processar áudio:', error);
@@ -76,7 +69,7 @@ async function generateAudio(text) {
 
 // Função para sincronizar os lábios
 function syncLips(duration) {
-  const avatar = document.getElementById('avatar-static');
+  const avatar = document.getElementById('avatar-video'); // Alterado de 'avatar-static' para 'avatar-video'
   avatar.style.transform = 'scaleY(0.9)';
   setTimeout(() => {
     avatar.style.transform = 'scaleY(1)';
@@ -86,11 +79,8 @@ function syncLips(duration) {
 // Função para processar a entrada do usuário
 document.getElementById('send-button').addEventListener('click', async () => {
   const input = document.getElementById('chat-input').value;
-
   if (!input.trim()) return alert('Por favor, digite uma mensagem.');
-
   try {
-    // Enviar pergunta para a API do chatbot
     const response = await fetch('https://api.dialogflow.com/v1/query', {
       method: 'POST',
       headers: {
@@ -103,16 +93,10 @@ document.getElementById('send-button').addEventListener('click', async () => {
         sessionId: '123456'
       })
     });
-
     if (!response.ok) throw new Error('Erro ao processar resposta do chatbot');
-
     const data = await response.json();
     const answer = data.result.fulfillment.speech;
-
-    // Exibir resposta
     alert(answer);
-
-    // Gerar áudio e sincronizar lábios
     generateAudio(answer);
   } catch (error) {
     console.error('Erro ao processar chatbot:', error);
@@ -131,7 +115,6 @@ function createParticles() {
     container.appendChild(particle);
   }
 }
-
 createParticles();
 
 // Função genérica para tornar um elemento arrastável
@@ -141,45 +124,38 @@ function makeElementDraggable(elementId) {
   let offsetX = 0;
   let offsetY = 0;
 
-  // Evento de início do arrasto (quando o usuário clica no elemento)
   element.addEventListener('mousedown', (e) => {
-    e.preventDefault(); // Impede o comportamento padrão de arrastar a imagem <button class="citation-flag" data-index="1">
+    e.preventDefault();
     isDragging = true;
     offsetX = e.clientX - element.getBoundingClientRect().left;
     offsetY = e.clientY - element.getBoundingClientRect().top;
-    element.style.cursor = 'grabbing'; // Altera o cursor para indicar arrasto
+    element.style.cursor = 'grabbing';
   });
 
-  // Evento de movimento do mouse (enquanto o usuário arrasta o elemento)
   document.addEventListener('mousemove', (e) => {
     if (isDragging) {
-      e.preventDefault(); // Impede o comportamento padrão de arrastar a imagem <button class="citation-flag" data-index="1">
-      const x = e.clientX - offsetX; // Calcula a posição horizontal
-      const y = e.clientY - offsetY; // Calcula a posição vertical
-
-      // Garantir que o elemento não saia dos limites da tela
+      e.preventDefault();
+      const x = e.clientX - offsetX;
+      const y = e.clientY - offsetY;
       const maxX = window.innerWidth - element.offsetWidth;
       const maxY = window.innerHeight - element.offsetHeight;
-
       element.style.position = 'absolute';
-      element.style.left = `${Math.min(Math.max(x, 0), maxX)}px`; // Limita o movimento horizontal
-      element.style.top = `${Math.min(Math.max(y, 0), maxY)}px`; // Limita o movimento vertical
+      element.style.left = `${Math.min(Math.max(x, 0), maxX)}px`;
+      element.style.top = `${Math.min(Math.max(y, 0), maxY)}px`;
     }
   });
 
-  // Evento de término do arrasto (quando o usuário solta o clique)
   document.addEventListener('mouseup', () => {
     isDragging = false;
-    element.style.cursor = 'grab'; // Retorna o cursor ao estado normal
+    element.style.cursor = 'grab';
   });
 
-  // Alterar o cursor ao passar sobre o elemento
   element.addEventListener('mouseenter', () => {
-    element.style.cursor = 'grab'; // Cursor de "clicar e arrastar"
+    element.style.cursor = 'grab';
   });
 
   element.addEventListener('mouseleave', () => {
-    element.style.cursor = 'default'; // Cursor padrão quando fora do elemento
+    element.style.cursor = 'default';
   });
 }
 
