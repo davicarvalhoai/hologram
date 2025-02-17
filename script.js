@@ -49,7 +49,7 @@ async function generateAudio(text) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'xi-api-key': 'sua-chave-de-api-aqui'
+        'xi-api-key': 'sk_86d347fa7bd06faec8520e86014f87f86765c66ed1a56a87'
       },
       body: JSON.stringify({
         text: text,
