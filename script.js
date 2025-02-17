@@ -26,7 +26,7 @@ setInterval(playRandomAnimation, 5000);
 
 // Função para fazer o avatar reagir ao scroll
 window.addEventListener('scroll', () => {
-  console.log('Scroll detectado'); // Verifica se o evento está sendo acionado <button class="citation-flag" data-index="5">
+  console.log('Scroll detectado'); // Verifica se o evento está sendo acionado
   const avatar = document.getElementById('avatar-static');
   if (!avatar) {
     console.error('Elemento #avatar-static não encontrado no DOM.');
