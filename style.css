@@ -12,6 +12,7 @@ body {
   height: 100vh;
   border: none;
   z-index: 1;
+  overflow: hidden; /* Impede que o iframe capture o scroll */
 }
 
 /* Estilização do contêiner do avatar */
