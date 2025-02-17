@@ -104,7 +104,7 @@ body {
   border-radius: 5px; /* Bordas arredondadas */
   font-size: 14px;
   outline: none; /* Remove o contorno azul padrão ao focar */
-  z-index: 9999; /* Garante que o campo esteja em primeiro plano <button class="citation-flag" data-index="6"> */
+  z-index: 9999; /* Garante que o campo esteja em primeiro plano */
   position: relative; /* Permite o uso de z-index */
 }
 
