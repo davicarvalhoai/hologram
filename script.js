@@ -44,84 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 3000);
 });
 
-// Função para gerar áudio com IA
-async function generateAudio(text) {
-  try {
-    const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/voice-id', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'xi-api-key': 'sua-chave-de-api-aqui'
-      },
-      body: JSON.stringify({
-        text: text,
-        voice_settings: {
-          stability: 0.5,
-          similarity_boost: 0.7
-        }
-      })
-    });
-    if (!response.ok) throw new Error('Erro ao gerar áudio');
-    const audioBlob = await response.blob();
-    const audioUrl = URL.createObjectURL(audioBlob);
-    const audio = new Audio(audioUrl);
-    audio.play();
-    syncLips(audio.duration * 1000);
-  } catch (error) {
-    console.error('Erro ao processar áudio:', error);
-  }
-}
-
-// Função para sincronizar os lábios
-function syncLips(duration) {
-  const avatar = document.getElementById('avatar-static');
-  avatar.style.transform = 'scaleY(0.9)';
-  setTimeout(() => {
-    avatar.style.transform = 'scaleY(1)';
-  }, duration);
-}
-
-// Função para processar a entrada do usuário
-document.getElementById('send-button').addEventListener('click', async () => {
-  const input = document.getElementById('chat-input').value;
-  if (!input.trim()) return alert('Por favor, digite uma mensagem.');
-  try {
-    const response = await fetch('https://api.dialogflow.com/v1/query', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer sua-chave-de-api-aqui'
-      },
-      body: JSON.stringify({
-        query: input,
-        lang: 'pt-br',
-        sessionId: '123456'
-      })
-    });
-    if (!response.ok) throw new Error('Erro ao processar resposta do chatbot');
-    const data = await response.json();
-    const answer = data.result.fulfillment.speech;
-    alert(answer);
-    generateAudio(answer);
-  } catch (error) {
-    console.error('Erro ao processar chatbot:', error);
-  }
-});
-
-// Função para criar partículas flutuantes dinâmicas
-function createParticles() {
-  const container = document.getElementById('avatar-container');
-  for (let i = 0; i < 10; i++) {
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
-    particle.style.top = `${Math.random() * 100}%`;
-    particle.style.left = `${Math.random() * 100}%`;
-    particle.style.animationDuration = `${Math.random() * 3 + 2}s`;
-    container.appendChild(particle);
-  }
-}
-createParticles();
-
 // Função genérica para tornar um elemento arrastável
 function makeElementDraggable(elementId) {
   const element = document.getElementById(elementId);
@@ -135,6 +57,7 @@ function makeElementDraggable(elementId) {
     offsetX = e.clientX - element.getBoundingClientRect().left;
     offsetY = e.clientY - element.getBoundingClientRect().top;
     element.style.cursor = 'grabbing';
+    element.style.position = 'fixed'; // Altera para fixed ao iniciar o arrasto <button class="citation-flag" data-index="1">
   });
 
   document.addEventListener('mousemove', (e) => {
@@ -144,7 +67,6 @@ function makeElementDraggable(elementId) {
       const y = e.clientY - offsetY;
       const maxX = window.innerWidth - element.offsetWidth;
       const maxY = window.innerHeight - element.offsetHeight;
-      element.style.position = 'absolute';
       element.style.left = `${Math.min(Math.max(x, 0), maxX)}px`;
       element.style.top = `${Math.min(Math.max(y, 0), maxY)}px`;
     }
