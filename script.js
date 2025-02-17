@@ -32,7 +32,7 @@ window.addEventListener('scroll', () => {
     console.error('Elemento #avatar-static não encontrado no DOM.');
     return;
   }
-  avatar.style.transform = `rotate(${window.scrollY * 0.1}deg)`;
+  avatar.style.transform = `rotate(${window.scrollY * 0.1}deg)`; // Apenas altera a rotação
 });
 
 // Exibir mensagem inicial ao carregar o site
