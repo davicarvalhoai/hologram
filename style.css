@@ -68,41 +68,83 @@ body {
   position: fixed; /* Fixa a caixa de diálogo na tela */
   bottom: 20px;
   right: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  width: 350px; /* Largura ajustada para um design moderno */
+  background: white;
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombreamento suave */
+  overflow: hidden; /* Remove barras de rolagem internas */
   z-index: 9999;
 }
 
-/* Estilização da caixa de diálogo */
-#chat-box {
-  background: rgba(255, 255, 255, 0.9);
+/* Cabeçalho da caixa de diálogo */
+#chat-header {
+  background: #1abc9c; /* Cor de destaque */
+  color: white;
   padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 9999;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
-/* Estilização dos elementos da caixa de diálogo */
+/* Corpo da caixa de diálogo */
+#chat-body {
+  padding: 15px;
+  max-height: 400px; /* Altura máxima para evitar sobrecarga visual */
+  overflow-y: auto; /* Barra de rolagem interna, se necessário */
+}
+
+/* Campo de entrada de texto */
 #chat-input {
-  width: 200px;
-  padding: 5px;
+  width: calc(100% - 20px); /* Largura ajustada para caber dentro do contêiner */
+  padding: 10px;
+  margin: 10px;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 5px; /* Bordas arredondadas */
+  font-size: 14px;
+  outline: none; /* Remove o contorno azul padrão ao focar */
 }
 
+/* Botão de envio */
 #send-button {
-  margin-left: 10px;
-  padding: 5px 10px;
-  background: #1abc9c;
+  display: block;
+  width: calc(100% - 20px);
+  margin: 10px auto 20px;
+  padding: 10px;
+  background: #1abc9c; /* Cor de destaque */
   color: white;
   border: none;
-  border-radius: 3px;
+  border-radius: 5px; /* Bordas arredondadas */
+  font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
+  transition: background 0.3s ease; /* Efeito suave ao passar o mouse */
 }
 
 #send-button:hover {
-  background: #16a085;
+  background: #16a085; /* Tom mais escuro no hover */
+}
+
+/* Mensagens exibidas na caixa de diálogo */
+.chat-message {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Mensagem do usuário */
+.user-message {
+  background: #f1f1f1; /* Fundo claro para mensagens do usuário */
+  align-self: flex-end;
+}
+
+/* Mensagem do chatbot */
+.bot-message {
+  background: #e6f7ff; /* Fundo azul claro para mensagens do chatbot */
+  align-self: flex-start;
 }
 
 /* Elementos invisíveis para criar scroll */
