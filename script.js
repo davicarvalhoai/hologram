@@ -152,6 +152,9 @@ function makeElementDraggable(elementId) {
   let offsetY = 0;
 
   element.addEventListener('mousedown', (e) => {
+    // Ignora o evento se o clique for no campo de entrada
+    if (e.target.id === 'chat-input') return;
+
     e.preventDefault();
     isDragging = true;
     offsetX = e.clientX - element.getBoundingClientRect().left;
