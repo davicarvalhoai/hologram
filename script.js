@@ -39,42 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 3000);
 });
 
-// Função para gerar áudio com IA
-async function generateAudio(text) {
-  try {
-    const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/voice-id', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'xi-api-key': 'sua-chave-de-api-aqui'
-      },
-      body: JSON.stringify({
-        text: text,
-        voice_settings: {
-          stability: 0.5,
-          similarity_boost: 0.7
-        }
-      })
-    });
-    if (!response.ok) throw new Error('Erro ao gerar áudio');
-    const audioBlob = await response.blob();
-    const audioUrl = URL.createObjectURL(audioBlob);
-    const audio = new Audio(audioUrl);
-    audio.play();
-    syncLips(audio.duration * 1000);
-  } catch (error) {
-    console.error('Erro ao processar áudio:', error);
-  }
-}
-
-// Função para sincronizar os lábios
-function syncLips(duration) {
-  const avatar = document.getElementById('avatar-video'); // Alterado de 'avatar-static' para 'avatar-video'
-  avatar.style.transform = 'scaleY(0.9)';
-  setTimeout(() => {
-    avatar.style.transform = 'scaleY(1)';
-  }, duration);
-}
 
 // Função para processar a entrada do usuário
 document.getElementById('send-button').addEventListener('click', async () => {
