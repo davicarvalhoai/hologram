@@ -24,18 +24,18 @@ body {
   border: none;
   background: transparent;
   overflow: hidden;
-  cursor: default; /* Alterado de "grab" para "default", pois o vídeo não será arrastável */
-  user-select: none;
+  cursor: grab; /* Cursor padrão para indicar que o avatar pode ser arrastado */
+  user-select: none; /* Impede a seleção de texto durante o arrasto */
   z-index: 9999;
 }
 
-/* Estilização do vídeo do avatar */
-#avatar-video {
+/* Avatar estático */
+#avatar-static {
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 0 10px cyan); /* Mantém o brilho azul ao redor do avatar */
+  filter: drop-shadow(0 0 10px cyan); /* Brilho azul ao redor do avatar */
   opacity: 0.9; /* Deixa o avatar semi-transparente */
-  pointer-events: none; /* Impede interações diretas com o vídeo */
+  pointer-events: none; /* Impede que a imagem seja arrastada pelo sistema <button class="citation-flag" data-index="1"> */
 }
 
 /* Partículas flutuantes */
