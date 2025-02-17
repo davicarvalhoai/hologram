@@ -3,12 +3,12 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background: #f0f0f0; /* Fundo cinza claro <button class="citation-flag" data-index="1"> */
+  background: #f0f0f0; /* Fundo cinza claro */
 }
 
 /* Estilização do contêiner do avatar */
 #avatar-container {
-  position: absolute;
+  position: fixed; /* Fixa o avatar na tela */
   bottom: 20px;
   right: 20px;
   width: 304px;
@@ -53,7 +53,7 @@ body {
 
 /* Estilização da caixa de mensagem inicial */
 #message-box {
-  position: fixed;
+  position: fixed; /* Fixa a caixa de mensagem na tela */
   bottom: 240px;
   right: 20px;
   background: white;
@@ -65,7 +65,7 @@ body {
 
 /* Estilização do contêiner da caixa de diálogo */
 #chat-container {
-  position: fixed; /* Fixa a caixa de diálogo */
+  position: fixed; /* Fixa a caixa de diálogo na tela */
   bottom: 20px;
   right: 20px;
   display: flex;
