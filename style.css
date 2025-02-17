@@ -1,25 +1,41 @@
+/* Estilização geral */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* Iframe */
+#test-iframe {
+  width: 100%;
+  height: 100vh;
+  border: none;
+  z-index: 1;
+}
+
 /* Estilização do contêiner do avatar */
 #avatar-container {
-  position: absolute; /* Permite mover o avatar livremente pela tela */
-  bottom: 20px; /* Posiciona no canto inferior */
-  right: 20px; /* Posiciona no canto direito */
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
   width: 304px;
   height: 540px;
   border: none;
   background: transparent;
   overflow: hidden;
-  cursor: grab; /* Cursor padrão para indicar que o avatar pode ser arrastado */
-  user-select: none; /* Impede a seleção de texto durante o arrasto */
-  z-index: 9999; /* Garante que o avatar fique acima de outros elementos <button class="citation-flag" data-index="5"> */
+  cursor: default; /* Alterado de "grab" para "default", pois o vídeo não será arrastável */
+  user-select: none;
+  z-index: 9999;
 }
 
-/* Avatar estático */
-#avatar-static {
+/* Estilização do vídeo do avatar */
+#avatar-video {
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 0 10px cyan); /* Brilho azul ao redor do avatar */
+  filter: drop-shadow(0 0 10px cyan); /* Mantém o brilho azul ao redor do avatar */
   opacity: 0.9; /* Deixa o avatar semi-transparente */
-  pointer-events: none; /* Impede que a imagem seja arrastada pelo sistema <button class="citation-flag" data-index="1"> */
+  pointer-events: none; /* Impede interações diretas com o vídeo */
 }
 
 /* Partículas flutuantes */
@@ -52,20 +68,18 @@
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 9999; /* Garante que a caixa de mensagem fique acima do avatar */
+  z-index: 9999;
 }
 
 /* Estilização do contêiner da caixa de diálogo */
 #chat-container {
-  position: absolute; /* Permite mover a caixa de diálogo livremente pela tela */
-  bottom: 20px; /* Posiciona no canto inferior */
-  right: 20px; /* Posiciona no canto direito */
+  position: fixed; /* Fixa a caixa de diálogo */
+  bottom: 20px;
+  right: 20px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Alinha os elementos à esquerda */
-  cursor: grab; /* Cursor padrão para indicar que a caixa de diálogo pode ser arrastada */
-  user-select: none; /* Impede a seleção de texto durante o arrasto */
-  z-index: 9999; /* Garante que a caixa de diálogo fique acima de outros elementos <button class="citation-flag" data-index="5"> */
+  align-items: flex-start;
+  z-index: 9999;
 }
 
 /* Estilização da caixa de diálogo */
@@ -74,7 +88,7 @@
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 9999; /* Garante que a caixa de diálogo fique acima de outros elementos <button class="citation-flag" data-index="5"> */
+  z-index: 9999;
 }
 
 /* Estilização dos elementos da caixa de diálogo */
